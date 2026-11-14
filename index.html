@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>شطرنج آنلاین و پیشرفته</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♟️</text></svg>">
+</head>
+<body data-theme="green">
+
+  <!-- Top App Bar -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      </div>
+      <div>
+        <h1>شطرنج آنلاین</h1>
+        <span class="mode-badge" id="mode-badge">دو نفره محلی</span>
+      </div>
+    </div>
+
+    <div class="top-bar-actions">
+      <button class="btn-icon" id="btn-sound-toggle" title="قطع/وصل صدا">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
+      <button class="btn-icon" id="btn-settings" title="تنظیمات">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+      <button class="btn-primary" id="btn-new-game" style="width: auto; padding: 8px 18px; font-size: 0.9rem;">
+        بازی جدید
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-container">
+    
+    <!-- Game Column -->
+    <div class="game-column">
+      
+      <!-- Top / Opponent Player Card (Black by default) -->
+      <div class="player-card" id="player-card-black">
+        <div class="player-details">
+          <div class="player-avatar black-avatar">B</div>
+          <div class="player-info-text">
+            <span class="player-name" id="black-player-name">سیاه (حریف)</span>
+            <div class="captured-pieces">
+              <span class="material-diff" id="black-material-diff"></span>
+              <div id="black-captured"></div>
+            </div>
+          </div>
+        </div>
+        <div class="player-clock" id="black-clock">10:00</div>
+      </div>
+
+      <!-- Chess Board Container -->
+      <div class="board-wrapper">
+        <div class="chess-board" id="chess-board"></div>
+      </div>
+
+      <!-- Bottom / User Player Card (White by default) -->
+      <div class="player-card" id="player-card-white">
+        <div class="player-details">
+          <div class="player-avatar white-avatar">W</div>
+          <div class="player-info-text">
+            <span class="player-name" id="white-player-name">سفید (شما)</span>
+            <div class="captured-pieces">
+              <span class="material-diff" id="white-material-diff"></span>
+              <div id="white-captured"></div>
+            </div>
+          </div>
+        </div>
+        <div class="player-clock" id="white-clock">10:00</div>
+      </div>
+
+    </div>
+
+    <!-- Side Control Panel -->
+    <aside class="side-panel">
+      <!-- Status Card -->
+      <div class="game-status-card">
+        <span class="game-status-text" id="status-text">نوبت حرکت: سفید</span>
+      </div>
+
+      <!-- Actions Grid -->
+      <div class="actions-grid">
+        <button class="btn-action" id="btn-flip-board" title="چرخش صفحه شطرنج">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <polyline points="23 20 23 14 17 14"></polyline>
+            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+          </svg>
+          چرخش
+        </button>
+        <button class="btn-action" id="btn-draw" title="پیشنهاد مساوی">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+          </svg>
+          تساوی
+        </button>
+        <button class="btn-action danger" id="btn-resign" title="تسلیم شدن">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+            <line x1="4" y1="22" x2="4" y2="15"></line>
+          </svg>
+          تسلیم
+        </button>
+        <button class="btn-action" id="btn-copy-pgn" title="کپی تاریخچه حرکات PGN">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          PGN
+        </button>
+      </div>
+
+      <!-- Move History -->
+      <div class="history-section">
+        <div class="history-header">
+          <span>حرکات بازی</span>
+          <span style="font-size: 0.75rem; color: #888;">استاندارد FIDE</span>
+        </div>
+        <div class="moves-list" id="moves-list"></div>
+      </div>
+
+      <!-- Online Chat & Reactions (Visible during Online Play) -->
+      <div class="online-box" id="online-chat-box" style="display: none;">
+        <div class="reactions-bar">
+          <button class="btn-reaction" data-emoji="👍">👍</button>
+          <button class="btn-reaction" data-emoji="🔥">🔥</button>
+          <button class="btn-reaction" data-emoji="😭">😭</button>
+          <button class="btn-reaction" data-emoji="🤯">🤯</button>
+          <button class="btn-reaction" data-emoji="👏">👏</button>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-row">
+          <input type="text" id="chat-input" placeholder="پیام به حریف..." maxlength="100">
+          <button class="btn-send" id="btn-send-chat">ارسال</button>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- MODAL: Mode Selector -->
+  <div class="modal-overlay" id="mode-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">انتخاب حالت بازی</h3>
+        <button class="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <button class="btn-primary" id="btn-open-online-setup" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          بازی دو نفره آنلاین (با لینک یا کد)
+        </button>
+
+        <button class="btn-secondary" id="btn-open-ai-setup" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+            <rect x="9" y="9" width="6" height="6"></rect>
+            <line x1="9" y1="1" x2="9" y2="4"></line>
+            <line x1="15" y1="1" x2="15" y2="4"></line>
+            <line x1="9" y1="20" x2="9" y2="23"></line>
+            <line x1="15" y1="20" x2="15" y2="23"></line>
+            <line x1="20" y1="9" x2="23" y2="9"></line>
+            <line x1="20" y1="14" x2="23" y2="14"></line>
+            <line x1="1" y1="9" x2="4" y2="9"></line>
+            <line x1="1" y1="14" x2="4" y2="14"></line>
+          </svg>
+          بازی با هوش مصنوعی (کامپیوتر)
+        </button>
+
+        <button class="btn-secondary" id="btn-start-local" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          بازی دو نفره روی همین دستگاه
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Online 2-Player Setup -->
+  <div class="modal-overlay" id="online-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">شطرنج آنلاین دو نفره</h3>
+        <button class="btn-close-modal">&times;</button>
+      </div>
+      
+      <!-- Setup View -->
+      <div class="modal-body" id="online-setup-view">
+        <div class="form-group">
+          <label class="form-label">ساخت اتاق جدید و دعوت دوست:</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="form-group">
+              <label class="form-label" style="font-size: 0.75rem;">انتخاب مهره</label>
+              <select class="form-select" id="online-color-select">
+                <option value="w">سفید</option>
+                <option value="b">سیاه</option>
+                <option value="random">تصادفی</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size: 0.75rem;">زمان بازی</label>
+              <select class="form-select" id="online-time-select">
+                <option value="3">۳ دقیقه (بلیتس)</option>
+                <option value="5">۵ دقیقه (بلیتس)</option>
+                <option value="10" selected>۱۰ دقیقه (سریع)</option>
+                <option value="15">۱۵ دقیقه (کلاسیک)</option>
+                <option value="0">نامحدود</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-primary" id="btn-create-online-room" style="margin-top: 8px;">
+            ساخت اتاق و دریافت لینک
+          </button>
+        </div>
+
+        <div style="text-align: center; color: #888; font-size: 0.85rem; margin: 4px 0;">یا</div>
+
+        <div class="form-group">
+          <label class="form-label">ورود به اتاق دوستان:</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" class="form-input" id="join-room-code" placeholder="کد اتاق (مثلاً 5A8B2)" style="text-transform: uppercase;">
+            <button class="btn-secondary" id="btn-join-online-room" style="width: auto; padding: 10px 20px;">
+              ورود
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Waiting View (shown when host creates room) -->
+      <div class="modal-body" id="online-waiting-view" style="display: none; text-align: center;">
+        <p style="font-size: 0.95rem; color: #ccc;">اتاق با موفقیت ساخته شد! کد را برای دوستتان بفرستید:</p>
+        <div class="room-code-badge" style="justify-content: center; font-size: 1.8rem; margin: 12px 0;">
+          <span id="display-room-code">-----</span>
+        </div>
+        <button class="btn-primary" id="btn-copy-room-link" style="margin-bottom: 8px;">
+          📋 کپی لینک مستقیم دعوت
+        </button>
+        <p style="font-size: 0.8rem; color: var(--md-sys-color-secondary); animation: pulse-clock 1.5s infinite alternate;">
+          ⏳ منتظر اتصال حریف... به محض ورود بازی خودکار شروع می‌شود.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: AI Setup Dialog -->
+  <div class="modal-overlay" id="ai-setup-dialog">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">تنظیمات بازی با هوش مصنوعی</h3>
+        <button class="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">رنگ مهره شما</label>
+          <select class="form-select" id="ai-color-select">
+            <option value="w">سفید</option>
+            <option value="b">سیاه</option>
+            <option value="random">تصادفی</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">سطح دشواری هوش مصنوعی</label>
+          <select class="form-select" id="ai-diff-select">
+            <option value="1">مبتدی (Easy)</option>
+            <option value="2" selected>متوسط (Intermediate)</option>
+            <option value="3">پیشرفته (Master)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">زمان هر بازیکن</label>
+          <select class="form-select" id="ai-time-select">
+            <option value="5">۵ دقیقه</option>
+            <option value="10" selected>۱۰ دقیقه</option>
+            <option value="15">۱۵ دقیقه</option>
+            <option value="0">نامحدود</option>
+          </select>
+        </div>
+        <button class="btn-primary" id="btn-confirm-ai-game">شروع بازی با کامپیوتر</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Pawn Promotion Dialog -->
+  <div class="modal-overlay" id="promotion-modal">
+    <div class="modal-card" style="max-width: 360px; text-align: center;">
+      <h3 class="modal-title" style="margin-bottom: 8px;">ارتقاء پیاده</h3>
+      <p style="font-size: 0.85rem; color: #aaa;">مهره مورد نظر خود را برای ارتقا انتخاب کنید:</p>
+      <div class="promotion-options">
+        <button class="promotion-piece-btn" data-piece="q" title="وزیر"></button>
+        <button class="promotion-piece-btn" data-piece="r" title="رخ"></button>
+        <button class="promotion-piece-btn" data-piece="b" title="فیل"></button>
+        <button class="promotion-piece-btn" data-piece="n" title="اسب"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Game Over Dialog -->
+  <div class="modal-overlay" id="game-over-modal">
+    <div class="modal-card" style="text-align: center;">
+      <h3 class="modal-title" id="game-over-title">پایان بازی</h3>
+      <p id="game-over-desc" style="color: #bbb; margin: 12px 0; font-size: 0.95rem;"></p>
+      <div style="display: flex; gap: 10px; margin-top: 16px;">
+        <button class="btn-primary" id="btn-rematch">بازی مجدد</button>
+        <button class="btn-secondary btn-close-modal">بستن</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Settings -->
+  <div class="modal-overlay" id="settings-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">تنظیمات صفحه</h3>
+        <button class="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">تم صفحه شطرنج</label>
+          <select class="form-select" id="theme-select">
+            <option value="green">سبز مسابقاتی (Tournament Green)</option>
+            <option value="wood">چوبی کلاسیک (Classic Wood)</option>
+            <option value="blue">آبی یخی (Ice Blue)</option>
+            <option value="midnight">میدنایت تاریک (Midnight Dark)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Core JavaScript Libraries & Application Code -->
+  <script src="js/chess.min.js"></script>
+  <script src="js/peerjs.min.js"></script>
+  <script src="js/pieces.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/p2p.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
